@@ -1,0 +1,164 @@
+\section{Appendix 2: Parameters}
+
+\begin{figure}[h]
+\begin{center}
+	\scriptsize{
+	\begin{python}
+INS_POS_LENGTH1 = 8.0
+INS_POS_WIDTH1 = 8.0
+ALPHA_LIMITS = [-180.0, 180.0]
+ALPHA_DEFAULT = 0.0
+ALPHA_RPM_LIMITS = [0.73, 2.78]
+	\end{python}
+	}
+	\caption{Former fps_share.py program (code lines 124-128).}
+	\label{fig:appendix:parameters_former_fps}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+	\scriptsize{
+	\begin{python}
+# zone where the positioner is affected by the repulsive force of other positioners
+STATUS_OFF_ZONE_INFLUENCE = 3.5
+STATUS_ON_ZONE_INFLUENCE = 7.5
+
+LIMITE_FOR_NOISE = 0.08
+
+CSTE_FORCE=6.2
+	\end{python}
+	}
+	\caption{Former pa_dnf.py program (code lines 138-144).}
+	\label{fig:appendix:parameters_former_pa_dnf}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[h]
+\begin{center}
+	\scriptsize{
+	\begin{python}
+sim_length = 210
+dt = 0.25
+max_speed_alpha = 2*math.pi*2.78/60
+min_speed_alpha = 2*math.pi*0.73/60
+max_speed_beta = 2*math.pi*3.75/60
+min_speed_beta = 2*math.pi*0.98/60
+	\end{python}
+	}
+	\caption{Former path_generator.py program (code lines 39-44).}
+	\label{fig:appendix:parameters_former_path}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[h]
+\begin{center}
+	\scriptsize{
+	\begin{python}
+# PARAMETERS FILE
+
+# Simulation constants
+sim_length = 250
+dt = 0.25
+max_speed_alpha = 2*3.141592653*2.78/60
+min_speed_alpha = 2*3.141592653*0.73/60
+max_speed_beta = 2*3.141592653*3.75/60 
+min_speed_beta = 2*3.141592653*0.98/60
+
+# Dimensions 
+INS_POS_LENGTH1 = 7.4
+INS_POS_WIDTH1 = 8.0
+	\end{python}
+	}
+	\caption{parameters.txt file.}
+	\label{}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[h]
+\begin{center}
+	\scriptsize{
+	\begin{python}
+import numpy as np
+
+parameters = open('parameters.txt', 'r')
+parameters = parameters.read().split()
+
+def look_for(parameter):
+    for i in range(0, len(parameters)):
+        if parameters[i] == parameter:
+            parameter = eval(parameters[i+2])
+            break
+        else:
+            continue
+
+    return parameter
+
+sim_length = look_for('sim_length')
+dt = look_for('dt')
+
+max_speed_alpha = look_for('max_speed_alpha')
+min_speed_alpha = look_for('min_speed_alpha')
+max_speed_beta = look_for('max_speed_beta')
+min_speed_beta = look_for('min_speed_beta')
+	\end{python}
+	}
+	\caption{parameters.py program. This program opens the parameters.txt file, and look for parameters by their names using the function look_for (the name inside the function must be exactly the same). When the parameter is found, the function returns the value after the equal sign.}
+	\label{}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[h]
+\begin{center}
+	\scriptsize{
+	\begin{python}
+INS_POS_LENGTH1 = param.INS_POS_LENGTH1
+INS_POS_WIDTH1 = param.INS_POS_WIDTH1
+ALPHA_LIMITS = [param.ALPHA_TRAVEL_MIN, param.ALPHA_TRAVEL_MAX]
+ALPHA_DEFAULT = param.ALPHA_DEFAULT
+ALPHA_RPM_LIMITS = [param.ALPHA_RPM_MIN, param.ALPHA_RPM_MAX]
+	\end{python}
+	}
+	\caption{New fps_share.py program.}
+	\label{}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[h]
+\begin{center}
+	\scriptsize{
+	\begin{python}
+# zone where the positioner is affected by the repulsive force of other positioners
+STATUS_OFF_ZONE_INFLUENCE = param.STATUS_OFF_ZONE_INFLUENCE
+STATUS_ON_ZONE_INFLUENCE = param.STATUS_ON_ZONE_INFLUENCE
+LIMITE_FOR_NOISE = param.LIMITE_FOR_NOISE 
+CSTE_FORCE = param.CSTE_FORCE
+	\end{python}
+	}
+	\caption{New pa_dnf.py program.}
+	\label{}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[h]
+\begin{center}
+	\scriptsize{
+	\begin{python}
+sim_length = param.sim_length
+dt = param.dt
+max_speed_alpha = param.max_speed_alpha
+min_speed_alpha = param.min_speed_alpha
+max_speed_beta = param.max_speed_beta
+min_speed_beta = param.min_speed_beta
+	\end{python}
+	}
+	\caption{New path_generator.py program.}
+	\label{}
+\end{center}
+\end{figure}

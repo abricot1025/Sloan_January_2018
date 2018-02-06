@@ -1,0 +1,11 @@
+\section{Conclusion} \label{conclusion}
+
+The transition from the MOONS software to the Sloan needed two main modifications: the first one was on the structure of the actuators moving on the focal plane, which was different for two projects; the second one concerned the fibers used for the survey, as Sloan's ferules will contain to to three fibers. \\
+
+The first adjustment has been completed so the actuator's structure respects the one discussed on the Preliminary Study Report\cite{study_report}, as shown in Sections \ref{circles} and \ref{visualisation}. Furthermore, the program has been constructed so that some modifications where possible without hardcoding, and so that the program generating the structure also contained informations on the fibers available.\\
+
+The second point has not been completed yet: a solution could not be found yet to correct the target's destination of actuators, so that the desired fiber is positioned under the target surveyed (see Section \ref{set_target}). At least, some possibilities, for instance relocating target's position, could be excluded. The main alternative to work on is asking each actuator to move at the end of the computation to have the fiber on target's position, but it will constitute two challenges, one on the trajectory computation, and another one on the collision-free part of the software. \\
+
+Several components of the software have been improved: the structure has been modified to be able to adjust parameters easily (Section \ref{parameters}), and a new architecture has been designed (see Appendix 4), a program has been created to generate targets file to test the software (Section \ref{target_generator}), and to finish, the visualisation has been modify to take into account the features specific to the Sloan project. \\
+
+I personally enjoyed working on this project, as it was the first time I was working on the development of a software. The software is quite long to understand in depth, so some minor adjustments took some time, but then I could work on python's features I never worked on before (animations, user interface etc.). I would like to thank Prof. Kneib who gave me the opportunity to work on this project, Prof. Gillet for the freedom I had during the semester. 

@@ -1,0 +1,90 @@
+\section{Target assigning function update} \label{set_target}
+
+The target assigning function's purpose ($\textrm{set_target}$ in fps_shared.py) is to propose a target for each actuator. If the target fulfills certain criteria, especially on its position (the actuator must be able to reach the target), then the actuator is assigned to the target. It means the actuator's ferule's center will be moved to the target position.\\
+
+Two updates had to be made: first, the center of the ferule is not anymore the position of the fiber; as shown in Section \ref{reminder} on Figure \ref{fig:reminder:ferule}, the actuator has to be placed under the desired fiber. Furthermore, we have to be able to ask in advance for each target to be seen by a visible fiber, a calibration fiber or an IR fiber. The first problem will be treated in Section \ref{set_target_1}, while the second one will be covered in Section \ref{fiber_attribution}.
+
+\subsection{$\textrm{set_target}$} \label{set_target_1}
+
+As said earlier, the function $\textrm{set_target}$ is used to assign a target to a certain actuator. If the target was it the range of action of the actuator, then the actuator was assigned to this target. Otherwise, the assignment stoped. In addition to assigning the target to the actuator, the function gave the actuator's ferule's center its destination, which was set at the position of the target. As said in the Reminder, the position of the fiber is not anymore at the center of the ferule, but at one of three points near from the ferule, as shown on Figure \ref{fig:reminder:ferule}. This situation imposed two tasks:
+
+\begin{enumerate}
+	\item Knowing and setting in advance which fiber the target has to be surveyed with.
+	\item Changing the actuator desired position depending on the fiber used.
+\end{enumerate}
+
+The first task had been solved the following way: in addition to the position, parity and priority of each target, the target file now requires a new column to be filled with a number (as for the priority) between 1, 0 and -1 depending on the chosen fiber. The correspondance is shown in Table \ref{table:set_target:target_file_fiber}. Former and new target file structures, with two example lines, are shown in Tables \ref{table:set_target:former_target} and \ref{table:set_target:new_target}.
+\\
+
+The second tasks required more reasoning. The following ideas were studied:
+
+\begin{enumerate}
+	\item Drifting the position of the target depending on the choice of the fiber.
+	\item Moving each motors to the target (under the center), and then ask a small displacement to move the fiber under the target.
+	\item Changing the coordinates of the wished position for each motor, depending on the wished fiber.
+	%\item Relocating the position of the center of the ferule depending on the wished fiber.
+\end{enumerate}
+
+The first proposition was removed, as it adds confusion in the software between the real position of the target and the virtual one, besides visualisation problems.\\
+
+The second one was also removed, as it doesn't take into account deadlocked actuators, and can lead to collisions during the part where each actuator move the ferule to the good position. Moreover, the change in the position depends on the actual position of the actuator before the correction. \\
+
+The third proposition has been chosen for its simplicity: after setting the destination for the actuator's ferule's center, a correction is added, in the referential of the actuator, depending on the fiber used. The code added can be seen in the Appendix 3. Notwithstanding, it appears this technique does not work in our case: if the two degrees of freedom available would have been the radius and the angle, the modification of the target's position in the center's ferule's referential would have been unique. However, as we have two angles as degrees of freedom, there exists  an infinite number of combination ($\alpha$, $\beta$) respecting the correction aforementioned: first, there is two set of combination depending on the parity (for a fixed $\alpha$, both $\beta$ and $\frac{\pi}{2}-\beta$ give the same solution), but furthermore, targets randomly generated are generally positioned on spots where the solution couple ($\alpha$, $\beta$) is not unique, but continuous. Hence, the correction to the actuator's position will depends on the final ($\alpha$, $\beta$), coming down to solution 2.
+
+\begin{table}[h]
+	\begin{center}
+	\begin{tabular}{|c|c|}
+	\hline
+	Indicator & Fiber used  \\
+	\hline
+1 & IR \\
+0 & Visible \\
+-1 & Calibration \\
+	\hline
+	\end{tabular}
+	\caption{Correspondance between the target file filling and the fiber to be used.}
+	\label{table:set_target:target_file_fiber}
+	\end{center}
+\end{table}
+
+\begin{table}[h]
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+	\hline
+	R actuator & $\theta$ actuator & R target & $\theta$ target & Arg 1 parity & Arg 2 parity & Priority \\
+	\hline
+25.2587	& 30 & 32.6135 & 358.578	 & 0 & 1 & 1 \\
+25.2587	& 90 & 25.4647 & 67.2179 & 0 & 1 & 1 \\
+	\hline
+	\end{tabular}
+	\caption{Former target file structure with two lines as example.}
+	\label{table:set_target:former_target}
+\end{table}
+
+\begin{table}[h]
+	\begin{tabular}{|c|c|c|c|c|c|c|c|}
+	\hline
+	R actuator & $\theta$ actuator & R target & $\theta$ target & Arg 1 parity & Arg 2 parity & Priority & Fiber \\
+	\hline
+25.2587	& 30 & 32.6135 & 358.578	 & 0 & 1 & 1 & 1 \\
+25.2587	& 90 & 25.4647 & 67.2179 & 0	 & 1	 & 1 & -1 \\
+	\hline
+	\end{tabular}
+	\caption{New target file structure with two lines as example.}
+	\label{table:set_target:new_target}
+\end{table}
+
+
+
+
+\subsection{Fiber attribution} \label{fiber_attribution}
+
+The next task will be to use the information on each actuator from the Sloan structure from Section \ref{circles}. More precisely, the goal will be to give the autorisation to actuators to be set on targets only if they are able to. Thus, the following modifications have been made : 
+
+\begin{itemize}
+	\item If an actuator is an Empty one (empty rectangle for Sloan) or a Fiducial one, target is never set ($\textrm{Set_target}$ returns False). 
+	\item If the target needs an IR fiber, but the proposed actuator only has visible and calibration, target is not set ($\textrm{Set_target}$ returns False).
+	\item If the target needs an IR fiber, and the proposed actuator owns an IR fiber, nothing changes.
+	\item If the target needs a visible or a calibration fiber, nothing changes.
+\end{itemize}
+
+The code added to ensure it can be seen in the Appendix 3.

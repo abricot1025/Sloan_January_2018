@@ -1,0 +1,5 @@
+\section{Parameters}  \label{parameters}
+
+Previously, the constants needed for the program to be launched (telescope's and actuators dimensions, DNF parameters etc.) were scattered all over the software. Thus, any attempt to modify one of those parameter was preceded by a research for the location of the variable definition in one of the programs. For instance, the previous software contained, on three different programs, the codes in Figures  \ref{fig:appendix:parameters_former_fps}, \ref{fig:appendix:parameters_former_pa_dnf} and \ref{fig:appendix:parameters_former_path} in Appendix 2. Moreover, a large part of those parameters were not at the very beginning of each program, but sometimes after the 100th code line, making the research for a variable tedious. \\
+
+To simplify the change of the variables, each one of them have been moved in a text file called "parameters.txt". The program "parameters.py" then looks inside this text file the value of the parameters, and gives those values to the rest of the software. This allows an efficient modification of any parameter and minimises the hardcoding problem.

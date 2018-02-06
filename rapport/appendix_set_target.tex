@@ -1,0 +1,59 @@
+\section{Appendix 3: $\textrm{Set_target}$ update}
+
+\begin{figure}[h]
+\begin{center}
+	\scriptsize{
+	\begin{python}
+# Determine the local (wrt positioner centre) coordinates for the
+# target.
+self.x_fibre_local = self.x_fibre_focal - self.x_centre_focal
+self.y_fibre_local = self.y_fibre_focal - self.y_centre_focal
+(self.r_fibre_local, self.theta_fibre_local) = util.cartesian_to_polar(self.x_fibre_local, self.y_fibre_local)
+
+if fiber == 1:
+	(self.r_fibre_local, self.theta_fibre_local) = (self.r_fibre_local + param.R_CORRECTION_IR, self.theta_fibre_local + param.THETA_CORRECTION_IR)
+elif fiber == 0:
+	(self.r_fibre_local, self.theta_fibre_local) = (self.r_fibre_local + param.R_CORRECTION_VISIBLE, self.theta_fibre_local + param.THETA_CORRECTION_VISIBLE)
+elif fiber == -- 1:
+	(self.r_fibre_local, self.theta_fibre_local) = (self.r_fibre_local + param.R_CORRECTION_CALIBRATION, self.theta_fibre_local + param.THETA_CORRECTION_CALIBRATION)
+	\end{python}
+	}
+	\caption{Code modifying the position targeted by the actuator, as function of the fiber used.}
+	\label{fig:appendix:set_target:position}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+	\scriptsize{
+	\begin{python}
+positioner_IR = False
+positioner_fiducial = False
+positioner_empty = False
+
+for item in circles_test.IR:
+	if positioner == item:
+		positioner_IR = True
+
+for item in circles_test.fiducial:
+	if positioner == item:
+		positioner_fiducial = True
+
+for item in circles_test.empty:
+	if positioner == item:
+		positioner_empty = True
+
+if fiber == 1 and positioner_IR == False:
+	return False
+
+if positioner_fiducial == True:
+	return False
+
+if positioner_empty == True:
+	return False
+	\end{python}
+	}
+	\caption{Code ensuring that Empty and Fiducial can not be set on any target, and that only IR actuator can be set on target desired to be surveyed with an IR fiber.}
+	\label{fig:appendix:set_target:attribution}
+\end{center}
+\end{figure}

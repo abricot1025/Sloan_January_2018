@@ -1,0 +1,21 @@
+\section{Appendix 5: Visualisation}
+
+\begin{figure}[h]
+\begin{center}
+	\scriptsize{
+	\begin{python}
+    for i, line in enumerate(fr2):
+        x1, x2, x3, x4, x5, x6, x7, x8 = map(float, line.split())
+        color_target = ''
+        if x8 == 1: color_target = 'orange'
+        elif x8 == 0: color_target = 'red'
+        elif x8 == -1: color_target = 'pink'
+
+        targetcircle = plt.Circle(util.polar_to_cartesian(x3,x4), radius=1, color=color_target, fill=True)
+        subfig.add_patch(targetcircle)
+	\end{python}
+	}
+	\caption{Code assigning a color to each targets on the animation, depending on the fiber required for the survey.}
+	\label{fig:appendix:visualisation}
+\end{center}
+\end{figure}

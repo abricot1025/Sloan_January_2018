@@ -1,0 +1,120 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+%\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{fullpage}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{siunitx}
+\usepackage{mathtools}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{gensymb}
+\usepackage{hyperref}
+\usepackage{wasysym}
+\usepackage{listings} 
+\usepackage{subfig}
+\usepackage{breqn}
+\usepackage{eqnarray}
+\usepackage{natbib}
+\usepackage{rotating}
+%\usepackage[top=1.0in, bottom=1.0in, left=1.0in, right=1.0in]{geometry}
+
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+\usepackage{color}
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+language=Python,
+basicstyle=\ttm,
+otherkeywords={self},             % Add keywords here
+keywordstyle=\ttb\color{deepblue},
+emph={MyClass,__init__},          % Custom highlighting
+emphstyle=\ttb\color{deepred},    % Custom highlighting style
+stringstyle=\color{deepgreen},
+frame=tb,                         % Any extra options here
+showstringspaces=false            %
+}}
+
+
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+}
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+\pythonstyle
+\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+\pythonstyle
+\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+\title{sloan.tex}
+
+\begin{document}
+
+	\input{title.tex}
+	\clearpage
+	
+	\tableofcontents
+	\clearpage
+
+	\input{1_introduction.tex}
+	\clearpage
+
+	\input{2_reminder.tex}
+	\clearpage
+	
+	\input{3_circles.tex}
+	\clearpage
+	
+	\input{4_parameter.tex}
+	\clearpage
+
+	\input{5_set_target.tex}
+	\clearpage
+		
+	\input{6_target_generator.tex}
+	\clearpage
+	
+	\input{7_results.tex}
+	\clearpage
+	
+	\input{7_to_do.tex}
+	\clearpage
+	
+	\input{8_conclusion.tex}
+	\clearpage
+	
+	\input{bibliography.tex}
+	\clearpage
+	
+	\input{appendix.tex}
+
+	
+\end{document}

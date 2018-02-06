@@ -1,0 +1,17 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\contentsline {section}{\numberline {2}From MOONS to Sloan : Reminder}{3}{section.2}
+\contentsline {section}{\numberline {3}Sloan actuator structure}{5}{section.3}
+\contentsline {section}{\numberline {4}Parameters}{9}{section.4}
+\contentsline {section}{\numberline {5}Target assigning function update}{10}{section.5}
+\contentsline {subsection}{\numberline {5.1}$\textrm {set_target}$}{10}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Fiber attribution}{12}{subsection.5.2}
+\contentsline {section}{\numberline {6}Target File Generator}{13}{section.6}
+\contentsline {section}{\numberline {7}Visualisation}{14}{section.7}
+\contentsline {section}{\numberline {8}To-do list}{16}{section.8}
+\contentsline {section}{\numberline {9}Conclusion}{17}{section.9}
+\contentsline {section}{\numberline {10}Appendix 1: Sloan actuators structure}{19}{section.10}
+\contentsline {section}{\numberline {11}Appendix 2: Parameters}{21}{section.11}
+\contentsline {section}{\numberline {12}Appendix 3: $\textrm {Set_target}$ update}{24}{section.12}
+\contentsline {section}{\numberline {13}Appendix 4: Software architecture}{26}{section.13}
+\contentsline {section}{\numberline {14}Appendix 5: Visualisation}{28}{section.14}
